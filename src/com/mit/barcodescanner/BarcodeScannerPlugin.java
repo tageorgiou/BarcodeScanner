@@ -55,4 +55,8 @@ public class BarcodeScannerPlugin extends GeneiousPlugin {
     			new BarcodeScannerAnnotationGenerator()
 		};
     }
+    
+    public DocumentOperation[] getDocumentOperations() {
+    	return new DocumentOperation[] {new BarcodeFinder()};
+    }
 }

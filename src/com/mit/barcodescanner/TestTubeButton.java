@@ -6,6 +6,7 @@ import javax.swing.JButton;
 
 public class TestTubeButton extends JButton {
 	public final String location;
+
 	private boolean hasBarcode = false;
 	private String barcode = "";
 	
@@ -30,11 +31,13 @@ public class TestTubeButton extends JButton {
 	public void setBarcode(String barcode) {
 		this.hasBarcode = true;
 		this.barcode = barcode;
+		setToolTipText(this.barcode);
 	}
 	
 	public void clearBarcode() {
 		this.hasBarcode = false;
 		this.barcode = "";
+		setToolTipText("");
 	}
 	
 }

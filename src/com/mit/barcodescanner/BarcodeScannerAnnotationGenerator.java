@@ -45,16 +45,22 @@ public class BarcodeScannerAnnotationGenerator extends
 		return DocumentField.createStringField("barcode", "Document's barcode", "barcode.code");
 	}
 	
+	private DocumentField makePlateLocField() {
+		return DocumentField.createStringField("plateloc", "Document's plate location", "plateloc.code");
+	}
+	
 	@Override
 	public List<SequenceAnnotationGenerator.AnnotationGeneratorResult> generate(AnnotatedPluginDocument[] documents,
 			SequenceAnnotationGenerator.SelectionRange selectionRange,
 			ProgressListener progresslistener,
 			Options options) throws DocumentOperationException {
+		BarcodeScannerOptions bcso = (BarcodeScannerOptions) options;
+		String scannerAddress = bcso.getScannerAddress();
 		List<SequenceAnnotationGenerator.AnnotationGeneratorResult> resultsList = new ArrayList<SequenceAnnotationGenerator.AnnotationGeneratorResult>();
 		
 		DocumentField barcodeField = makeBarcodeField();
 		Dialogs.showDialog(new DialogOptions(new Dialogs.DialogAction[] {
-				new Dialogs.DialogAction("booooo") {
+				new Dialogs.DialogAction("Done") {
 
 					@Override
 					public boolean performed(GDialog dialog) {
@@ -63,8 +69,10 @@ public class BarcodeScannerAnnotationGenerator extends
 					}
 					
 				}
-				},"boo"), new BarcodeScannerGui(documents, resultsList));
-		
+				},"Done"), new BarcodeScannerGui(documents, resultsList, scannerAddress));
+		System.out.println("RETURN");
+		for (int i = 0; i < documents.length - resultsList.size(); i++)
+			resultsList.add(new AnnotationGeneratorResult());
 		return resultsList;
 	}
 	

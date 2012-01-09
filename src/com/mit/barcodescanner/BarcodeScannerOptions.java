@@ -8,11 +8,15 @@ public class BarcodeScannerOptions extends Options {
 		codeLocationOptions();
 	}
 	
-	private FileSelectionOption codeLocation;
+	private StringOption scannerAddress;
 	
 	private void codeLocationOptions() {
-		codeLocation = addFileSelectionOption("EXE", "asd", "?");
-		codeLocation.setRestoreDefaultApplies(false);
+		scannerAddress = addStringOption("host", "Scanner address", "http://18.125.5.183:2233/");
+		scannerAddress.setRestoreDefaultApplies(false);
+	}
+	
+	public String getScannerAddress() {
+		return scannerAddress.getValue();
 	}
 
 }
